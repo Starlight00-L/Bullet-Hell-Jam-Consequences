@@ -1,1 +1,4 @@
+res://src/wave_manager.tscn
+res://Scripts/Wave_Controller.gd
+res://Scripts/Wave.gd
 res://src/enemy.tscn

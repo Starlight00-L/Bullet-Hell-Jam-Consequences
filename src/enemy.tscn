@@ -1,3 +1,22 @@
-[gd_scene format=3 uid="uid://di260psrcuejc"]
+[gd_scene load_steps=3 format=3 uid="uid://di260psrcuejc"]
 
-[node name="Enemy" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://cucc5hgxj4n7v" path="res://icon.svg" id="1_nvu6w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vxs5u"]
+radius = 61.0082
+
+[node name="Enemy" type="CharacterBody2D"]
+motion_mode = 1
+
+[node name="Enemy Sprite" type="Sprite2D" parent="."]
+modulate = Color(1, 0.840672, 0, 1)
+texture = ExtResource("1_nvu6w")
+
+[node name="Enemy Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vxs5u")
+
+[node name="Enemy" type="Node" parent="."]
+
+[node name="Enemy movement" type="Node" parent="."]
+
+[node name="Enemy attack" type="Node" parent="."]
