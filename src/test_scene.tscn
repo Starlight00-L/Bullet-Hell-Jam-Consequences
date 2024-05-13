@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://276fchlh457k"]
+
+[ext_resource type="PackedScene" uid="uid://di260psrcuejc" path="res://src/enemy.tscn" id="1_0qfx1"]
+[ext_resource type="PackedScene" uid="uid://dl2bxisskoj16" path="res://src/temp_player.tscn" id="2_ic2go"]
+
+[node name="Test Scene" type="Node2D"]
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_0qfx1")]
+player = NodePath("../Temp Player")
+
+[node name="Temp Player" parent="." instance=ExtResource("2_ic2go")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.34, 0.34)

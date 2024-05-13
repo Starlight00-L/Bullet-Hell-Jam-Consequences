@@ -1,12 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://di260psrcuejc"]
+[gd_scene load_steps=8 format=3 uid="uid://di260psrcuejc"]
 
+[ext_resource type="Script" path="res://Scripts/enemy_ai.gd" id="1_8tuet"]
 [ext_resource type="Texture2D" uid="uid://cucc5hgxj4n7v" path="res://icon.svg" id="1_nvu6w"]
+[ext_resource type="Script" path="res://Scripts/enemy_movement.gd" id="3_irq2s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxs5u"]
 radius = 61.0082
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_osy01"]
+radius = 631.134
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r6vvu"]
+radius = 915.014
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n3fun"]
+radius = 421.385
+
 [node name="Enemy" type="CharacterBody2D"]
 motion_mode = 1
+script = ExtResource("1_8tuet")
 
 [node name="Enemy Sprite" type="Sprite2D" parent="."]
 modulate = Color(1, 0.840672, 0, 1)
@@ -17,6 +29,127 @@ shape = SubResource("CircleShape2D_vxs5u")
 
 [node name="Enemy" type="Node" parent="."]
 
-[node name="Enemy movement" type="Node" parent="."]
+[node name="Enemy movement" type="Node" parent="." node_paths=PackedStringArray("wall_rays")]
+script = ExtResource("3_irq2s")
+accel = 3.0
+wall_rays = [NodePath("Wall Check 1"), NodePath("Wall Check 2"), NodePath("Wall Check 3"), NodePath("Wall Check 4"), NodePath("Wall Check 5"), NodePath("Wall Check 6"), NodePath("Wall Check 7"), NodePath("Wall Check 8")]
+
+[node name="Wall Check 1" type="RayCast2D" parent="Enemy movement"]
+target_position = Vector2(0, 90.085)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Ray endpoint" type="Node2D" parent="Enemy movement/Wall Check 1"]
+position = Vector2(0, 90)
+
+[node name="Wall Check 2" type="RayCast2D" parent="Enemy movement"]
+rotation = 0.785398
+target_position = Vector2(0, 90.085)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Ray endpoint2" type="Node2D" parent="Enemy movement/Wall Check 2"]
+position = Vector2(-0.00355148, 90.0819)
+rotation = -0.785398
+
+[node name="Wall Check 3" type="RayCast2D" parent="Enemy movement"]
+rotation = 1.5708
+target_position = Vector2(0, 90.085)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Ray endpoint3" type="Node2D" parent="Enemy movement/Wall Check 3"]
+position = Vector2(0.000325799, 90)
+rotation = -1.5708
+
+[node name="Wall Check 4" type="RayCast2D" parent="Enemy movement"]
+rotation = 2.35619
+target_position = Vector2(0, 90.085)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Ray endpoint4" type="Node2D" parent="Enemy movement/Wall Check 4"]
+position = Vector2(0.0102005, 90.0677)
+rotation = -2.35619
+
+[node name="Wall Check 5" type="RayCast2D" parent="Enemy movement"]
+rotation = 3.14159
+target_position = Vector2(0, 90.085)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Ray endpoint5" type="Node2D" parent="Enemy movement/Wall Check 5"]
+position = Vector2(-0.000228166, 90)
+rotation = -3.14159
+
+[node name="Wall Check 6" type="RayCast2D" parent="Enemy movement"]
+rotation = 3.92699
+target_position = Vector2(0, 90.085)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Ray endpoint6" type="Node2D" parent="Enemy movement/Wall Check 6"]
+position = Vector2(0.00346375, 90.0607)
+rotation = 2.3562
+
+[node name="Wall Check 7" type="RayCast2D" parent="Enemy movement"]
+rotation = 4.71239
+target_position = Vector2(0, 90.085)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Ray endpoint7" type="Node2D" parent="Enemy movement/Wall Check 7"]
+position = Vector2(8.7738e-05, 90)
+rotation = 1.5708
+
+[node name="Wall Check 8" type="RayCast2D" parent="Enemy movement"]
+rotation = 5.49779
+target_position = Vector2(0, 90.085)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Ray endpoint8" type="Node2D" parent="Enemy movement/Wall Check 8"]
+position = Vector2(-0.00682831, 90.0359)
+rotation = 0.785395
+scale = Vector2(1, 1)
 
 [node name="Enemy attack" type="Node" parent="."]
+
+[node name="Attack Range" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Range"]
+shape = SubResource("CircleShape2D_osy01")
+debug_color = Color(0.0272211, 0.7, 0, 0.42)
+
+[node name="Chase Range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chase Range"]
+shape = SubResource("CircleShape2D_r6vvu")
+debug_color = Color(0.7, 0.0172836, 0, 0.42)
+
+[node name="Stop Range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stop Range"]
+shape = SubResource("CircleShape2D_n3fun")
+debug_color = Color(0.7, 0.66014, 0, 0.42)
+
+[node name="Ray Check" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="Move Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="area_exited" from="Chase Range" to="Enemy movement" method="_on_chase_range_area_exited"]
+[connection signal="area_entered" from="Stop Range" to="Enemy movement" method="_on_stop_range_area_entered"]
+[connection signal="timeout" from="Ray Check" to="Enemy movement" method="_on_ray_check_timeout"]
+[connection signal="timeout" from="Move Timer" to="Enemy movement" method="_on_move_timer_timeout"]

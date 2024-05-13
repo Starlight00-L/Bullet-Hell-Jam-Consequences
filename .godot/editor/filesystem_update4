@@ -1,4 +1,7 @@
-res://src/wave_manager.tscn
-res://Scripts/Wave_Controller.gd
-res://Scripts/Wave.gd
 res://src/enemy.tscn
+res://Scripts/enemy_ai.gd
+res://Scripts/enemy_movement.gd
+res://src/test_scene.tscn
+res://Scripts/temporary_player_script.gd
+res://src/temp_player.tscn
+res://src/wave_manager.tscn
