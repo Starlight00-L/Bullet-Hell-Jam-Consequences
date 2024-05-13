@@ -119,7 +119,6 @@ collide_with_bodies = false
 [node name="Ray endpoint8" type="Node2D" parent="Enemy movement/Wall Check 8"]
 position = Vector2(-0.00682831, 90.0359)
 rotation = 0.785395
-scale = Vector2(1, 1)
 
 [node name="Enemy attack" type="Node" parent="."]
 
