@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://276fchlh457k"]
+[gd_scene load_steps=6 format=3 uid="uid://276fchlh457k"]
 
 [ext_resource type="PackedScene" uid="uid://di260psrcuejc" path="res://src/enemy.tscn" id="1_0qfx1"]
 [ext_resource type="PackedScene" uid="uid://dl2bxisskoj16" path="res://src/temp_player.tscn" id="2_ic2go"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_q4d5l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w85xl"]
+size = Vector2(206, 1915)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0yu8g"]
+size = Vector2(3448, 189)
 
 [node name="Test Scene" type="Node2D"]
 
@@ -12,3 +20,67 @@ player = NodePath("../Temp Player")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.34, 0.34)
+
+[node name="Wall" type="Node2D" parent="."]
+position = Vector2(-1688, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall"]
+position = Vector2(-0.681765, 5.06447)
+scale = Vector2(-206.179, 1914.84)
+texture = SubResource("CanvasTexture_q4d5l")
+
+[node name="Area2D" type="Area2D" parent="Wall"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/Area2D"]
+position = Vector2(-1, 4.5)
+shape = SubResource("RectangleShape2D_w85xl")
+
+[node name="Wall2" type="Node2D" parent="."]
+position = Vector2(1608, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall2"]
+position = Vector2(-0.681765, 5.06447)
+scale = Vector2(-206.179, 1914.84)
+texture = SubResource("CanvasTexture_q4d5l")
+
+[node name="Area2D" type="Area2D" parent="Wall2"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2/Area2D"]
+position = Vector2(-1, 4.5)
+shape = SubResource("RectangleShape2D_w85xl")
+
+[node name="Wall3" type="Node2D" parent="."]
+position = Vector2(5, -958)
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall3"]
+position = Vector2(-32.7579, 0)
+scale = Vector2(-3446.7, 186.231)
+texture = SubResource("CanvasTexture_q4d5l")
+
+[node name="Area2D" type="Area2D" parent="Wall3"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3/Area2D"]
+position = Vector2(-33, 0.5)
+shape = SubResource("RectangleShape2D_0yu8g")
+
+[node name="Wall4" type="Node2D" parent="."]
+position = Vector2(-38, 959)
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall4"]
+position = Vector2(-32.7579, 0)
+scale = Vector2(-3446.7, 186.231)
+texture = SubResource("CanvasTexture_q4d5l")
+
+[node name="Area2D" type="Area2D" parent="Wall4"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall4/Area2D"]
+position = Vector2(-33, 0.5)
+shape = SubResource("RectangleShape2D_0yu8g")

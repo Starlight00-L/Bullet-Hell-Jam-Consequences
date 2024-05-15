@@ -31,14 +31,20 @@ shape = SubResource("CircleShape2D_vxs5u")
 
 [node name="Enemy movement" type="Node" parent="." node_paths=PackedStringArray("wall_rays")]
 script = ExtResource("3_irq2s")
-accel = 3.0
+max_speed = 3.0
+accel = 1.0
 wall_rays = [NodePath("../Strafe Rays/Wall Check 1"), NodePath("../Strafe Rays/Wall Check 2"), NodePath("../Strafe Rays/Wall Check 3"), NodePath("../Strafe Rays/Wall Check 4"), NodePath("../Strafe Rays/Wall Check 5"), NodePath("../Strafe Rays/Wall Check 6"), NodePath("../Strafe Rays/Wall Check 7"), NodePath("../Strafe Rays/Wall Check 8")]
 
 [node name="Direction Holder" type="Node2D" parent="."]
+rotation = -1.5708
 
 [node name="Direction Ray" type="RayCast2D" parent="Direction Holder"]
 modulate = Color(1, 0, 0, 1)
-target_position = Vector2(0, 100)
+target_position = Vector2(0, 200)
+collision_mask = 2
+
+[node name="Endpoint" type="Node2D" parent="Direction Holder/Direction Ray"]
+position = Vector2(-8.52372e-06, 195)
 
 [node name="Strafe Rays" type="Node2D" parent="."]
 
@@ -155,7 +161,11 @@ wait_time = 2.0
 [node name="Ray check" type="Timer" parent="."]
 wait_time = 0.5
 
+[node name="Avoid duration" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_exited" from="Chase Range" to="Enemy movement" method="_on_chase_range_area_exited"]
 [connection signal="area_entered" from="Stop Range" to="Enemy movement" method="_on_stop_range_area_entered"]
 [connection signal="timeout" from="Move Timer" to="Enemy movement" method="_on_move_timer_timeout"]
 [connection signal="timeout" from="Ray check" to="Enemy movement" method="_on_ray_check_timeout"]
+[connection signal="timeout" from="Avoid duration" to="Enemy movement" method="_on_avoid_duration_timeout"]

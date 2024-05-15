@@ -5,6 +5,7 @@ enum states{STRAFING, MOVING}
 
 @onready var move_timer = $"../Move Timer"
 @onready var ray_check_timer = $"../Ray check"
+@onready var avoid_timer = $"../Avoid duration"
 @onready var direction_ray = $"../Direction Holder/Direction Ray"
 
 var moving_states = states.MOVING
@@ -13,7 +14,7 @@ var moving_states = states.MOVING
 @export var accel : float = 0
 @export var rot_speed : float = 2
 var angle_cone_of_vision := deg_to_rad(161)
-var max_view_distance := 30
+var max_view_distance := 150
 var angle_between_rays := deg_to_rad(40)
 var move_dir : Vector2
 
@@ -39,16 +40,18 @@ func set_move_dir(new_pos : Vector2):
 		return
 	
 	var new_dir = new_pos - parent.position
-	direction_ray.rotate(new_dir.angle())
+	direction_ray.rotation = new_dir.angle()
 	move_dir = new_dir.normalized()
 
 func check_movement_direction(delta): #moves direction when detecting an obstacle in front of it
 	for ray in direction_ray.get_children():
 		if ray is RayCast2D && ray.is_colliding():
+			moving_states = states.STRAFING
 			if ray.rotation > 0:
 				direction_ray.rotate(delta * -rot_speed)
 			elif ray.rotation < 0:
 				direction_ray.rotate(delta * rot_speed)
+			avoid_timer.start()
 			move_dir = get_ray_dir(direction_ray)
 			break
 
@@ -60,14 +63,17 @@ func movement(delta):
 func strafe():
 	var dir_chosen = randi_range(0, wall_rays.size() - 1)
 	move_dir = get_ray_dir(wall_rays[dir_chosen])
+	direction_ray.rotate(move_dir.angle())
 
 func check_rays():
 	for r in wall_rays:
 		if r.is_colliding():
 			move_dir = -get_ray_dir(r)
+			moving_states = states.STRAFING
+			avoid_timer.start()
 			return
 
-func generate_raycasts() -> void: #Makes raycasts onto direction ray in a cone for obstacle avoidence
+func generate_raycasts(): #Makes raycasts onto direction ray in a cone for obstacle avoidence
 	var ray_count := angle_cone_of_vision / angle_between_rays
 	
 	for index in ray_count:
@@ -77,6 +83,8 @@ func generate_raycasts() -> void: #Makes raycasts onto direction ray in a cone f
 		ray.target_position.y = max_view_distance
 		ray.set_collision_mask_value(1, false)
 		ray.set_collision_mask_value(2, true)
+		ray.collide_with_bodies = false
+		ray.collide_with_areas = true
 		direction_ray.add_child(ray)
 		ray.enabled = true
 
@@ -108,3 +116,6 @@ func _on_chase_range_area_exited(area):
 
 func _on_ray_check_timeout():
 	check_rays()
+
+func _on_avoid_duration_timeout():
+	moving_states = states.MOVING
