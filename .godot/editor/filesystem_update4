@@ -1,4 +1,5 @@
-res://src/wave_manager.tscn
 res://src/enemy.tscn
+res://src/wave_manager.tscn
 res://src/test_scene.tscn
 res://src/temp_player.tscn
+res://Scripts/enemy_movement.gd
