@@ -1,11 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://bh5yqa5qo45gc"]
+[gd_scene load_steps=15 format=3 uid="uid://bh5yqa5qo45gc"]
 
 [ext_resource type="Script" path="res://Scripts/player_main.gd" id="1_0uaco"]
 [ext_resource type="Texture2D" uid="uid://cslxcrsnwuatp" path="res://Sprites/gardener.png" id="2_xorgv"]
 [ext_resource type="Script" path="res://Scripts/Player_Anim_Controller.gd" id="3_w64y2"]
 [ext_resource type="Script" path="res://Scripts/Player Movement.gd" id="3_xsbyc"]
+[ext_resource type="Script" path="res://Scripts/Player Attack Controller.gd" id="4_s64lq"]
+[ext_resource type="Script" path="res://Scripts/Health Manager.gd" id="5_xw2vi"]
+[ext_resource type="Texture2D" uid="uid://j3dx3odp6oc4" path="res://Sprites/gun_1.png" id="6_fth8h"]
+[ext_resource type="Script" path="res://Scripts/Rotate_To_Mouse.gd" id="7_giij3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xuesb"]
+radius = 6.0
+height = 16.0
 
 [sub_resource type="Animation" id="Animation_1cn56"]
 resource_name = "Idle"
@@ -62,7 +68,11 @@ _data = {
 "Run": SubResource("Animation_nqm1w")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_qtwpx"]
+radius = 6.0
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+scale = Vector2(3, 3)
 script = ExtResource("1_0uaco")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -76,11 +86,41 @@ vframes = 4
 
 [node name="Player Movement" type="Node" parent="."]
 script = ExtResource("3_xsbyc")
+max_speed = 300
+acceleration = 1500
+friction = 2000
+
+[node name="Player Attack Controller" type="Node" parent="."]
+script = ExtResource("4_s64lq")
+
+[node name="Fire" type="Timer" parent="Player Attack Controller"]
+one_shot = true
 
 [node name="Animation Controller" type="Node" parent="."]
 script = ExtResource("3_w64y2")
+
+[node name="Health Manager" type="Node" parent="."]
+script = ExtResource("5_xw2vi")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_2yqah")
 }
+
+[node name="Player Area Detector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player Area Detector"]
+shape = SubResource("CircleShape2D_qtwpx")
+
+[node name="Gun" type="Node2D" parent="."]
+script = ExtResource("7_giij3")
+
+[node name="Gun Sprite" type="Sprite2D" parent="Gun"]
+texture = ExtResource("6_fth8h")
+offset = Vector2(5.225, 1.445)
+
+[node name="Fire Point" type="Node2D" parent="Gun"]
+position = Vector2(13, -0.666667)
+
+[connection signal="timeout" from="Player Attack Controller/Fire" to="Player Attack Controller" method="_on_fire_timeout"]
+[connection signal="area_entered" from="Player Area Detector" to="." method="_on_player_area_detector_area_entered"]

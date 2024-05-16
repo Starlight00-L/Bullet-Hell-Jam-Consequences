@@ -1,7 +1,12 @@
 res://src/player.tscn
-res://Scripts/Player Movement.gd
+res://Scripts/Health Manager.gd
 res://Scripts/player_main.gd
-res://src/wave_manager.tscn
 res://src/enemy.tscn
+res://Scripts/enemy_ai.gd
+res://Scripts/Player Attack Controller.gd
+res://Scripts/Player Bullet.gd
+res://src/player_bullet.tscn
+res://src/wave_manager.tscn
 res://src/test_scene.tscn
 res://src/temp_player.tscn
+res://Scripts/Rotate_To_Mouse.gd

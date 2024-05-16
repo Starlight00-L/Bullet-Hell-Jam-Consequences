@@ -1,22 +1,26 @@
-[gd_scene load_steps=8 format=3 uid="uid://di260psrcuejc"]
+[gd_scene load_steps=10 format=3 uid="uid://di260psrcuejc"]
 
 [ext_resource type="Script" path="res://Scripts/enemy_ai.gd" id="1_8tuet"]
 [ext_resource type="Texture2D" uid="uid://cucc5hgxj4n7v" path="res://icon.svg" id="1_nvu6w"]
 [ext_resource type="Script" path="res://Scripts/enemy_movement.gd" id="3_irq2s"]
+[ext_resource type="Script" path="res://Scripts/Health Manager.gd" id="3_msew2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxs5u"]
 radius = 61.0082
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bohqb"]
+radius = 52.8867
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_osy01"]
 radius = 631.134
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r6vvu"]
-radius = 915.014
+radius = 696.93
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n3fun"]
 radius = 421.385
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 motion_mode = 1
 script = ExtResource("1_8tuet")
 
@@ -29,10 +33,18 @@ shape = SubResource("CircleShape2D_vxs5u")
 
 [node name="Enemy" type="Node" parent="."]
 
+[node name="Health Manager" type="Node" parent="."]
+script = ExtResource("3_msew2")
+
+[node name="Enemy Area Detection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy Area Detection"]
+shape = SubResource("CircleShape2D_bohqb")
+
 [node name="Enemy movement" type="Node" parent="." node_paths=PackedStringArray("wall_rays")]
 script = ExtResource("3_irq2s")
-max_speed = 3.0
-accel = 1.0
+max_speed = 2.0
+accel = 0.5
 wall_rays = [NodePath("../Strafe Rays/Wall Check 1"), NodePath("../Strafe Rays/Wall Check 2"), NodePath("../Strafe Rays/Wall Check 3"), NodePath("../Strafe Rays/Wall Check 4"), NodePath("../Strafe Rays/Wall Check 5"), NodePath("../Strafe Rays/Wall Check 6"), NodePath("../Strafe Rays/Wall Check 7"), NodePath("../Strafe Rays/Wall Check 8")]
 
 [node name="Direction Holder" type="Node2D" parent="."]
