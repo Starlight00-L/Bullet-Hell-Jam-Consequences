@@ -1,0 +1,86 @@
+[gd_scene load_steps=10 format=3 uid="uid://bh5yqa5qo45gc"]
+
+[ext_resource type="Script" path="res://Scripts/player_main.gd" id="1_0uaco"]
+[ext_resource type="Texture2D" uid="uid://cslxcrsnwuatp" path="res://Sprites/gardener.png" id="2_xorgv"]
+[ext_resource type="Script" path="res://Scripts/Player_Anim_Controller.gd" id="3_w64y2"]
+[ext_resource type="Script" path="res://Scripts/Player Movement.gd" id="3_xsbyc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xuesb"]
+
+[sub_resource type="Animation" id="Animation_1cn56"]
+resource_name = "Idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_sgece"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_nqm1w"]
+resource_name = "Run"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2yqah"]
+_data = {
+"Idle": SubResource("Animation_1cn56"),
+"RESET": SubResource("Animation_sgece"),
+"Run": SubResource("Animation_nqm1w")
+}
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_0uaco")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_xuesb")
+
+[node name="Player Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_xorgv")
+offset = Vector2(0, -8)
+hframes = 5
+vframes = 4
+
+[node name="Player Movement" type="Node" parent="."]
+script = ExtResource("3_xsbyc")
+
+[node name="Animation Controller" type="Node" parent="."]
+script = ExtResource("3_w64y2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2yqah")
+}
