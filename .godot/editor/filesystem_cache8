@@ -1,13 +1,21 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1715968204
+::res://::1715980625
 icon.svg::CompressedTexture2D::6180922381448124385::1715834459::1715834459::1::::<><>::
-::res://Scripts/::1715969281
-Bullet.gd::GDScript::-1::1715919361::0::1::::Bullet<>CharacterBody2D<>::
-Enemy attack.gd::GDScript::-1::1715969281::0::1::::Enemy_Attack_Controller<>Node<>::
-enemy_ai.gd::GDScript::-1::1715968334::0::1::::Enemy_AI<>CharacterBody2D<>::
-enemy_movement.gd::GDScript::-1::1715925647::0::1::::Enemy_Movement<>Node<>::
-Health Manager.gd::GDScript::-1::1715919256::0::1::::Health_Manager<>Node<>::
-Player Attack Controller.gd::GDScript::-1::1715919316::0::1::::Player_Attack_Controller<>Node<>::
+::res://Resources/::1715974937
+Attack_Pattern.gd::GDScript::-1::1715974937::0::1::::Attack_Pattern<>Resource<>::
+Easy_Attack_Pattern.tres::Resource/Attack_Pattern::823227435709489026::1715974937::0::1::::<><>::res://Resources/Attack_Pattern.gd
+Extreme_Attack_Pattern.tres::Resource/Attack_Pattern::1810000344322510871::1715974937::0::1::::<><>::res://Resources/Attack_Pattern.gd
+Hard_Attack_Pattern.tres::Resource/Attack_Pattern::1487502573917896207::1715974937::0::1::::<><>::res://Resources/Attack_Pattern.gd
+Impossible_Attack_Pattern.tres::Resource/Attack_Pattern::7291254510473277856::1715974937::0::1::::<><>::res://Resources/Attack_Pattern.gd
+Medium_Attack_Pattern.tres::Resource/Attack_Pattern::5966800719636849641::1715974937::0::1::::<><>::res://Resources/Attack_Pattern.gd
+Very_Hard_Attack_Pattern.tres::Resource/Attack_Pattern::3231711628014527055::1715974937::0::1::::<><>::res://Resources/Attack_Pattern.gd
+::res://Scripts/::1715974937
+Bullet.gd::GDScript::-1::1715974937::0::1::::Bullet<>CharacterBody2D<>::
+Enemy attack.gd::GDScript::-1::1715974937::0::1::::Enemy_Attack_Controller<>Node<>::
+enemy_ai.gd::GDScript::-1::1715974937::0::1::::Enemy_AI<>CharacterBody2D<>::
+enemy_movement.gd::GDScript::-1::1715974937::0::1::::Enemy_Movement<>Node<>::
+Health Manager.gd::GDScript::-1::1715974937::0::1::::Health_Manager<>Node<>::
+Player Attack Controller.gd::GDScript::-1::1715974937::0::1::::Player_Attack_Controller<>Node<>::
 Player Movement.gd::GDScript::-1::1715895894::0::1::::Player_Movement<>Node<>::
 Player_Anim_Controller.gd::GDScript::-1::1715895894::0::1::::Player_Animation_Controller<>Node<>::
 player_main.gd::GDScript::-1::1715895894::0::1::::Player_Script<>CharacterBody2D<>::
@@ -18,10 +26,10 @@ Wave_Controller.gd::GDScript::-1::1715834459::0::1::::Wave_Manager<>Node2D<>::
 ::res://Sprites/::1715895894
 gardener.png::CompressedTexture2D::6060349691911159605::1715895894::1715834826::1::::<><>::
 gun_1.png::CompressedTexture2D::689726886532729057::1715895894::1715895894::1::::<><>::
-::res://src/::1715969391
-Bullet.tscn::PackedScene::3706689864222067043::1715969377::0::1::::<><>::res://Scripts/Bullet.gd<>uid://cucc5hgxj4n7v::::res://icon.svg
-enemy.tscn::PackedScene::7778438687599156516::1715969391::0::1::::<><>::res://Scripts/enemy_ai.gd<>uid://cucc5hgxj4n7v::::res://icon.svg<>res://Scripts/enemy_movement.gd<>res://Scripts/Health Manager.gd<>res://Scripts/Enemy attack.gd
-player.tscn::PackedScene::2941159749400977166::1715969377::0::1::::<><>::res://Scripts/player_main.gd<>uid://cslxcrsnwuatp::::res://Sprites/gardener.png<>res://Scripts/Player_Anim_Controller.gd<>res://Scripts/Player Movement.gd<>res://Scripts/Player Attack Controller.gd<>res://Scripts/Health Manager.gd<>uid://j3dx3odp6oc4::::res://Sprites/gun_1.png<>res://Scripts/Rotate_To_Mouse.gd
-temp_player.tscn::PackedScene::7987179769534895623::1715969376::0::1::::<><>::res://Scripts/temporary_player_script.gd<>uid://cucc5hgxj4n7v::::res://icon.svg
-test_scene.tscn::PackedScene::1963050138472722874::1715969376::0::1::::<><>::uid://di260psrcuejc::::res://src/enemy.tscn<>uid://bh5yqa5qo45gc::::res://src/player.tscn
-wave_manager.tscn::PackedScene::3265948802102118175::1715969376::0::1::::<><>::res://Scripts/Wave_Controller.gd
+::res://src/::1715974937
+Bullet.tscn::PackedScene::3706689864222067043::1715974937::0::1::::<><>::res://Scripts/Bullet.gd<>uid://cucc5hgxj4n7v::::res://icon.svg
+enemy.tscn::PackedScene::7778438687599156516::1715974937::0::1::::<><>::res://Scripts/enemy_ai.gd<>uid://cucc5hgxj4n7v::::res://icon.svg<>uid://ly1o2sqcnpne::::res://Resources/Easy_Attack_Pattern.tres<>res://Scripts/enemy_movement.gd<>res://Scripts/Health Manager.gd<>res://Scripts/Enemy attack.gd
+player.tscn::PackedScene::2941159749400977166::1715974937::0::1::::<><>::res://Scripts/player_main.gd<>uid://cslxcrsnwuatp::::res://Sprites/gardener.png<>res://Scripts/Player_Anim_Controller.gd<>res://Scripts/Player Movement.gd<>res://Scripts/Player Attack Controller.gd<>res://Scripts/Health Manager.gd<>uid://j3dx3odp6oc4::::res://Sprites/gun_1.png<>res://Scripts/Rotate_To_Mouse.gd
+temp_player.tscn::PackedScene::7987179769534895623::1715974856::0::1::::<><>::res://Scripts/temporary_player_script.gd<>uid://cucc5hgxj4n7v::::res://icon.svg
+test_scene.tscn::PackedScene::1963050138472722874::1715974937::0::1::::<><>::uid://di260psrcuejc::::res://src/enemy.tscn<>uid://bh5yqa5qo45gc::::res://src/player.tscn
+wave_manager.tscn::PackedScene::3265948802102118175::1715974855::0::1::::<><>::res://Scripts/Wave_Controller.gd

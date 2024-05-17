@@ -1,6 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmsbx10pnv1ex"]
+[gd_scene load_steps=8 format=3 uid="uid://bmsbx10pnv1ex"]
 
 [ext_resource type="Script" path="res://Scripts/Wave_Controller.gd" id="1_n1y8b"]
+[ext_resource type="Resource" uid="uid://ly1o2sqcnpne" path="res://Resources/Easy_Attack_Pattern.tres" id="2_n61qe"]
+[ext_resource type="Resource" uid="uid://cramlor00b5o4" path="res://Resources/Medium_Attack_Pattern.tres" id="3_m8sx2"]
+[ext_resource type="Resource" uid="uid://vgs7kjm3slrr" path="res://Resources/Hard_Attack_Pattern.tres" id="4_emp7a"]
+[ext_resource type="Resource" uid="uid://bmbp23auqd6yl" path="res://Resources/Very_Hard_Attack_Pattern.tres" id="5_oadhg"]
+[ext_resource type="Resource" uid="uid://011pab8bdprr" path="res://Resources/Extreme_Attack_Pattern.tres" id="6_2ssqn"]
+[ext_resource type="Resource" uid="uid://db465qm5px43m" path="res://Resources/Impossible_Attack_Pattern.tres" id="7_arvji"]
 
 [node name="Wave Manager" type="Node2D"]
 script = ExtResource("1_n1y8b")
+attack_pattern_difficulties = Array[Resource("res://Resources/Attack_Pattern.gd")]([ExtResource("2_n61qe"), ExtResource("3_m8sx2"), ExtResource("4_emp7a"), ExtResource("5_oadhg"), ExtResource("6_2ssqn"), ExtResource("7_arvji")])
+
+[node name="Spawn_Delay" type="Timer" parent="."]
+one_shot = true
+
+[node name="Time Between Waves" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="Spawn_Delay" to="." method="_on_spawn_delay_timeout"]
+[connection signal="timeout" from="Time Between Waves" to="." method="_on_time_between_waves_timeout"]

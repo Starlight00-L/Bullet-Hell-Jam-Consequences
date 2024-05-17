@@ -6,6 +6,7 @@ extends Node
 @onready var fire_timer = $Fire
 @onready var bullet_prefab = preload("res://src/Bullet.tscn")
 
+@export var bullet_damage : int = 1
 @export var fire_rate : float = 1
 @export var bullet_speed : float = 5
 
@@ -25,6 +26,7 @@ func _process(_delta):
 func fire():
 	var new_bullet = bullet_prefab.instantiate()
 	new_bullet.group_name = "Player"
+	new_bullet.damage = bullet_damage
 	new_bullet.speed = bullet_speed
 	new_bullet.move_dir = fire_point.get_parent().rotation
 	new_bullet.spawn_pos = fire_point.global_position

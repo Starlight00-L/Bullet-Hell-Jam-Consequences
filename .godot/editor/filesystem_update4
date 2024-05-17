@@ -1,15 +1,10 @@
-res://src/enemy.tscn
-res://Scripts/Enemy attack.gd
-res://Scripts/enemy_ai.gd
 res://src/wave_manager.tscn
+res://Scripts/Wave_Controller.gd
+res://src/enemy.tscn
 res://src/test_scene.tscn
 res://src/temp_player.tscn
 res://src/player.tscn
 res://src/Bullet.tscn
-res://Resources/Attack_Pattern.gd
-res://Resources/Easy_Attack_Pattern.tres
-res://Resources/Medium_Attack_Pattern.tres
-res://Resources/Hard_Attack_Pattern.tres
-res://Resources/Very_Hard_Attack_Pattern.tres
-res://Resources/Extreme_Attack_Pattern.tres
-res://Resources/Impossible_Attack_Pattern.tres
+res://Scripts/Health Manager.gd
+res://Scripts/enemy_ai.gd
+res://Scripts/Player Attack Controller.gd

@@ -14,11 +14,15 @@ func _ready():
 	attack_controller.attack_pattern_stats = attack_pattern
 	attack_controller.randomize_stats()
 	attack_controller.set_up_attack()
+	health_controller.connect("death_signal", on_death)
 
 func _process(_delta):
 	if player != null:
 		movement_controller.set_move_dir(player.position)
 
+func on_death():
+	get_parent().get_node("Wave Manager").enemy_killed()
+	queue_free()
 
 func _on_attack_range_area_entered(area):
 	if area.is_in_group("Player"):

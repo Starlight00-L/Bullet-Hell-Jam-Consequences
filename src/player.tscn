@@ -92,6 +92,7 @@ friction = 2000
 
 [node name="Player Attack Controller" type="Node" parent="."]
 script = ExtResource("4_s64lq")
+bullet_damage = 5
 bullet_speed = 10.0
 
 [node name="Fire" type="Timer" parent="Player Attack Controller"]

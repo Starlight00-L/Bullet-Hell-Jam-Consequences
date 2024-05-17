@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://276fchlh457k"]
 
-[ext_resource type="PackedScene" uid="uid://di260psrcuejc" path="res://src/enemy.tscn" id="1_0qfx1"]
 [ext_resource type="PackedScene" uid="uid://bh5yqa5qo45gc" path="res://src/player.tscn" id="2_ljytq"]
+[ext_resource type="PackedScene" uid="uid://bmsbx10pnv1ex" path="res://src/wave_manager.tscn" id="2_s2u10"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_q4d5l"]
 
@@ -12,9 +12,6 @@ size = Vector2(206, 1915)
 size = Vector2(3448, 189)
 
 [node name="Test Scene" type="Node2D"]
-
-[node name="Enemy" parent="." instance=ExtResource("1_0qfx1")]
-position = Vector2(-1098, 21)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.34, 0.34)
@@ -85,3 +82,18 @@ shape = SubResource("RectangleShape2D_0yu8g")
 
 [node name="Player" parent="." instance=ExtResource("2_ljytq")]
 position = Vector2(800, -22)
+
+[node name="Wave Manager" parent="." node_paths=PackedStringArray("spawn_points") instance=ExtResource("2_s2u10")]
+spawn_points = [NodePath("Spawn Point 1"), NodePath("Spawn Point 2"), NodePath("Spawn Point 3"), NodePath("Spawn Point 4")]
+
+[node name="Spawn Point 1" type="Node2D" parent="Wave Manager"]
+position = Vector2(-1432, -746)
+
+[node name="Spawn Point 2" type="Node2D" parent="Wave Manager"]
+position = Vector2(1276, -750)
+
+[node name="Spawn Point 3" type="Node2D" parent="Wave Manager"]
+position = Vector2(1331, 721)
+
+[node name="Spawn Point 4" type="Node2D" parent="Wave Manager"]
+position = Vector2(-1449, 717)
