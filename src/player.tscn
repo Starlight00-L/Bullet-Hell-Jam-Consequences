@@ -92,9 +92,20 @@ friction = 2000
 
 [node name="Player Attack Controller" type="Node" parent="."]
 script = ExtResource("4_s64lq")
+bullet_speed = 10.0
 
 [node name="Fire" type="Timer" parent="Player Attack Controller"]
 one_shot = true
+
+[node name="Gun" type="Node2D" parent="."]
+script = ExtResource("7_giij3")
+
+[node name="Gun Sprite" type="Sprite2D" parent="Gun"]
+texture = ExtResource("6_fth8h")
+offset = Vector2(5.225, 1.445)
+
+[node name="Fire Point" type="Node2D" parent="Gun"]
+position = Vector2(13, -0.666667)
 
 [node name="Animation Controller" type="Node" parent="."]
 script = ExtResource("3_w64y2")
@@ -107,20 +118,11 @@ libraries = {
 "": SubResource("AnimationLibrary_2yqah")
 }
 
-[node name="Player Area Detector" type="Area2D" parent="."]
+[node name="Player Area Detector" type="Area2D" parent="." groups=["Player"]]
+collision_layer = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player Area Detector"]
 shape = SubResource("CircleShape2D_qtwpx")
-
-[node name="Gun" type="Node2D" parent="."]
-script = ExtResource("7_giij3")
-
-[node name="Gun Sprite" type="Sprite2D" parent="Gun"]
-texture = ExtResource("6_fth8h")
-offset = Vector2(5.225, 1.445)
-
-[node name="Fire Point" type="Node2D" parent="Gun"]
-position = Vector2(13, -0.666667)
 
 [connection signal="timeout" from="Player Attack Controller/Fire" to="Player Attack Controller" method="_on_fire_timeout"]
 [connection signal="area_entered" from="Player Area Detector" to="." method="_on_player_area_detector_area_entered"]

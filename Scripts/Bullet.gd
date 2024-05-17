@@ -1,9 +1,11 @@
-class_name Player_Bullet
+class_name Bullet
 extends CharacterBody2D
 
 @onready var lifetime_timer = $Lifetime
 
-@export var lifetime : float = 5
+@export var group_name : String
+@export var lifetime : float = 3
+@export var damage : int = 1
 @export var speed : float = 5
 @export var rot_speed : float = 0
 
@@ -25,6 +27,13 @@ func _physics_process(delta):
 func angular_movement(delta):
 	move_dir += rot_speed * delta
 
-
 func _on_lifetime_timeout():
 	queue_free()
+
+func _on_bullet_area_detection_area_entered(area):
+	if !area.is_in_group(group_name):
+		var obj_children = area.get_parent().get_children()
+		for c in obj_children:
+			if c.has_method("take_damage"):
+				c.take_damage(damage)
+				queue_free()

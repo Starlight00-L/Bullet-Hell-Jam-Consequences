@@ -95,6 +95,9 @@ func get_ray_dir(ray):
 	return r_global_cast_to_vector
 
 func _on_stop_range_area_entered(area):
+	if !area.is_in_group("Player"):
+		return
+	
 	if moving_states == states.STRAFING:
 		return
 	
@@ -109,10 +112,11 @@ func _on_move_timer_timeout():
 	strafe()
 
 func _on_chase_range_area_exited(area):
-	pause = false
-	ray_check_timer.stop()
-	move_timer.stop()
-	moving_states = states.MOVING
+	if area.is_in_group("Player"):
+		pause = false
+		ray_check_timer.stop()
+		move_timer.stop()
+		moving_states = states.MOVING
 
 func _on_ray_check_timeout():
 	check_rays()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://di260psrcuejc"]
+[gd_scene load_steps=11 format=3 uid="uid://di260psrcuejc"]
 
 [ext_resource type="Script" path="res://Scripts/enemy_ai.gd" id="1_8tuet"]
 [ext_resource type="Texture2D" uid="uid://cucc5hgxj4n7v" path="res://icon.svg" id="1_nvu6w"]
 [ext_resource type="Script" path="res://Scripts/enemy_movement.gd" id="3_irq2s"]
 [ext_resource type="Script" path="res://Scripts/Health Manager.gd" id="3_msew2"]
+[ext_resource type="Script" path="res://Scripts/Enemy attack.gd" id="4_5bbuq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxs5u"]
 radius = 61.0082
@@ -36,10 +37,27 @@ shape = SubResource("CircleShape2D_vxs5u")
 [node name="Health Manager" type="Node" parent="."]
 script = ExtResource("3_msew2")
 
-[node name="Enemy Area Detection" type="Area2D" parent="."]
+[node name="Enemy Area Detection" type="Area2D" parent="." groups=["Enemy"]]
+collision_layer = 9
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy Area Detection"]
 shape = SubResource("CircleShape2D_bohqb")
+
+[node name="Enemy attack" type="Node" parent="."]
+script = ExtResource("4_5bbuq")
+fire_point_count = 3
+radius = 100.0
+
+[node name="Shoot" type="Timer" parent="Enemy attack"]
+
+[node name="Rotator" type="Node2D" parent="."]
+
+[node name="Attack Range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Range"]
+shape = SubResource("CircleShape2D_osy01")
+debug_color = Color(0.0272211, 0.7, 0, 0.42)
 
 [node name="Enemy movement" type="Node" parent="." node_paths=PackedStringArray("wall_rays")]
 script = ExtResource("3_irq2s")
@@ -146,15 +164,6 @@ collide_with_bodies = false
 position = Vector2(-0.00682831, 90.0359)
 rotation = 0.785395
 
-[node name="Enemy attack" type="Node" parent="."]
-
-[node name="Attack Range" type="Area2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Range"]
-shape = SubResource("CircleShape2D_osy01")
-debug_color = Color(0.0272211, 0.7, 0, 0.42)
-
 [node name="Chase Range" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chase Range"]
@@ -176,6 +185,7 @@ wait_time = 0.5
 [node name="Avoid duration" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="timeout" from="Enemy attack/Shoot" to="Enemy attack" method="_on_shoot_timeout"]
 [connection signal="area_exited" from="Chase Range" to="Enemy movement" method="_on_chase_range_area_exited"]
 [connection signal="area_entered" from="Stop Range" to="Enemy movement" method="_on_stop_range_area_entered"]
 [connection signal="timeout" from="Move Timer" to="Enemy movement" method="_on_move_timer_timeout"]

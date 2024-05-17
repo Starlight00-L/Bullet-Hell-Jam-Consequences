@@ -8,10 +8,13 @@ func _ready():
 	current_health = max_health
 
 func take_damage(amount):
+	print(get_parent().name, " has taken damage!")
 	current_health -= amount
 	
 	if current_health <= 0:
-		pass #death signal
+		death()
+	
+	print("Health is now ", current_health)
 
 func death():
-	pass
+	get_parent().queue_free()

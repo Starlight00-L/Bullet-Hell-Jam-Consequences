@@ -1,16 +1,16 @@
 [gd_scene load_steps=5 format=3 uid="uid://bs2sv1ot86l7p"]
 
-[ext_resource type="Script" path="res://Scripts/Player Bullet.gd" id="1_y3j8f"]
-[ext_resource type="Texture2D" uid="uid://cucc5hgxj4n7v" path="res://icon.svg" id="2_0t7t2"]
+[ext_resource type="Script" path="res://Scripts/Bullet.gd" id="1_fg5py"]
+[ext_resource type="Texture2D" uid="uid://cucc5hgxj4n7v" path="res://icon.svg" id="2_bilby"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pvmh1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xdoda"]
 radius = 61.8142
 
-[node name="Player Bullet" type="CharacterBody2D"]
+[node name="Bullet" type="CharacterBody2D"]
 scale = Vector2(0.25, 0.25)
-script = ExtResource("1_y3j8f")
+script = ExtResource("1_fg5py")
 speed = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -18,13 +18,16 @@ shape = SubResource("CircleShape2D_pvmh1")
 disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_0t7t2")
+texture = ExtResource("2_bilby")
 
 [node name="Bullet Area Detection" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bullet Area Detection"]
 shape = SubResource("CircleShape2D_xdoda")
 
 [node name="Lifetime" type="Timer" parent="."]
 
+[connection signal="area_entered" from="Bullet Area Detection" to="." method="_on_bullet_area_detection_area_entered"]
 [connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]

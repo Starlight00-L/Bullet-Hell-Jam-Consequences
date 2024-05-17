@@ -13,8 +13,7 @@ size = Vector2(3448, 189)
 
 [node name="Test Scene" type="Node2D"]
 
-[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_0qfx1")]
-player = NodePath("../Player")
+[node name="Enemy" parent="." instance=ExtResource("1_0qfx1")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.34, 0.34)

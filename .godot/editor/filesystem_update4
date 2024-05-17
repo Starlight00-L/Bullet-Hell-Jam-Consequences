@@ -1,12 +1,14 @@
+res://src/player_bullet.tscn
+res://Scripts/Player Bullet.gd
+res://src/Bullet.tscn
 res://src/player.tscn
-res://Scripts/Health Manager.gd
-res://Scripts/player_main.gd
+res://Scripts/Player Attack Controller.gd
 res://src/enemy.tscn
 res://Scripts/enemy_ai.gd
-res://Scripts/Player Attack Controller.gd
-res://Scripts/Player Bullet.gd
-res://src/player_bullet.tscn
-res://src/wave_manager.tscn
 res://src/test_scene.tscn
+res://src/wave_manager.tscn
 res://src/temp_player.tscn
-res://Scripts/Rotate_To_Mouse.gd
+res://Scripts/Health Manager.gd
+res://Scripts/Bullet.gd
+res://Scripts/Enemy attack.gd
+res://Scripts/enemy_movement.gd
