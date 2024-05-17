@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://di260psrcuejc"]
+[gd_scene load_steps=12 format=3 uid="uid://di260psrcuejc"]
 
 [ext_resource type="Script" path="res://Scripts/enemy_ai.gd" id="1_8tuet"]
 [ext_resource type="Texture2D" uid="uid://cucc5hgxj4n7v" path="res://icon.svg" id="1_nvu6w"]
+[ext_resource type="Resource" uid="uid://ly1o2sqcnpne" path="res://Resources/Easy_Attack_Pattern.tres" id="2_bsl1h"]
 [ext_resource type="Script" path="res://Scripts/enemy_movement.gd" id="3_irq2s"]
 [ext_resource type="Script" path="res://Scripts/Health Manager.gd" id="3_msew2"]
 [ext_resource type="Script" path="res://Scripts/Enemy attack.gd" id="4_5bbuq"]
@@ -13,7 +14,7 @@ radius = 61.0082
 radius = 52.8867
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_osy01"]
-radius = 631.134
+radius = 817.296
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r6vvu"]
 radius = 696.93
@@ -24,6 +25,7 @@ radius = 421.385
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 motion_mode = 1
 script = ExtResource("1_8tuet")
+attack_pattern = ExtResource("2_bsl1h")
 
 [node name="Enemy Sprite" type="Sprite2D" parent="."]
 modulate = Color(1, 0.840672, 0, 1)
@@ -48,6 +50,8 @@ shape = SubResource("CircleShape2D_bohqb")
 script = ExtResource("4_5bbuq")
 fire_point_count = 3
 radius = 100.0
+attack_pattern_stats = ExtResource("2_bsl1h")
+randomize_attack = true
 
 [node name="Shoot" type="Timer" parent="Enemy attack"]
 
@@ -186,6 +190,8 @@ wait_time = 0.5
 one_shot = true
 
 [connection signal="timeout" from="Enemy attack/Shoot" to="Enemy attack" method="_on_shoot_timeout"]
+[connection signal="area_entered" from="Attack Range" to="." method="_on_attack_range_area_entered"]
+[connection signal="area_exited" from="Attack Range" to="." method="_on_attack_range_area_exited"]
 [connection signal="area_exited" from="Chase Range" to="Enemy movement" method="_on_chase_range_area_exited"]
 [connection signal="area_entered" from="Stop Range" to="Enemy movement" method="_on_stop_range_area_entered"]
 [connection signal="timeout" from="Move Timer" to="Enemy movement" method="_on_move_timer_timeout"]

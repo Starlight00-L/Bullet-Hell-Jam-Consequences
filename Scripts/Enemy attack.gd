@@ -12,10 +12,24 @@ extends Node
 @export var bullet_speed : float = 5
 @export var bullet_rotation : float = 0
 
-var lock_rotation : bool = false
-var counter : int = 0
+@export var attack_pattern_stats : Attack_Pattern
+@export var randomize_attack : bool = false
 
-func _ready():
+func _process(delta):
+	var new_rotation = rotator.rotation_degrees + rotate_speed * delta
+	rotator.rotation_degrees = fmod(new_rotation, 360)
+
+func randomize_stats():
+	if !randomize_attack:
+		return
+	
+	rotate_speed = attack_pattern_stats.get_rotate_speed()
+	shooter_timer_wait_time = attack_pattern_stats.get_fire_rate()
+	fire_point_count = attack_pattern_stats.get_fire_points()
+	bullet_speed = attack_pattern_stats.get_bullet_speed()
+	bullet_rotation = attack_pattern_stats.get_bullet_rotation()
+
+func set_up_attack():
 	var step = 2 * PI / fire_point_count
 	
 	for i in range(fire_point_count):
@@ -26,14 +40,6 @@ func _ready():
 		rotator.add_child(spawn_point)
 	
 	shoot_timer.wait_time = shooter_timer_wait_time
-	shoot_timer.start()
-
-func _process(delta):
-	if lock_rotation:
-		return
-	
-	var new_rotation = rotator.rotation_degrees + rotate_speed * delta
-	rotator.rotation_degrees = fmod(new_rotation, 360)
 
 func shoot():
 	for s in rotator.get_children():
@@ -45,7 +51,7 @@ func shoot():
 		
 		new_bullet.speed = bullet_speed
 		new_bullet.rot_speed = bullet_rotation
-		
+		new_bullet.lifetime = 10
 		get_parent().get_parent().add_child(new_bullet)
 	
 

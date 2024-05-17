@@ -112,6 +112,7 @@ script = ExtResource("3_w64y2")
 
 [node name="Health Manager" type="Node" parent="."]
 script = ExtResource("5_xw2vi")
+max_health = 20
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Attack_Pattern" load_steps=2 format=3 uid="uid://vgs7kjm3slrr"]
+
+[ext_resource type="Script" path="res://Resources/Attack_Pattern.gd" id="1_3vy5s"]
+
+[resource]
+script = ExtResource("1_3vy5s")
+rotate_speed_range = Vector2(-100, 100)
+shooter_timer_wait_time_range = Vector2(0.5, 1)
+fire_point_count_range = Vector2(3, 6)
+bullet_speed_range = Vector2(-7, 7)
+bullet_rotation_range = Vector2(-3, 3)
+bullet_lifetime = 15.0
