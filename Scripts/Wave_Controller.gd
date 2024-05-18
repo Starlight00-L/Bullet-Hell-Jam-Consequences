@@ -3,7 +3,6 @@ extends Node2D
 
 @onready var enemy = preload("res://src/enemy.tscn")
 @onready var spawn_delay_timer = $Spawn_Delay
-@onready var between_waves_timer = $"Time Between Waves"
 
 @export var spawn_points : Array[Node2D]
 @export var attack_pattern_difficulties : Array[Attack_Pattern]
@@ -17,6 +16,8 @@ var total_enemies_in_wave : int = 0
 
 var enemy_parent
 
+signal wave_end
+
 func _ready():
 	enemy_parent = get_parent()
 	
@@ -25,8 +26,6 @@ func _ready():
 		num_of_enemies_per_wave.append(enemy_num)
 	
 	current_difficulty = attack_pattern_difficulties[0]
-	
-	start_wave()
 
 func _process(delta):
 	if wave_in_progress && total_enemies_in_wave == 0:
@@ -41,9 +40,9 @@ func start_wave():
 	spawn_delay_timer.start()
 
 func end_wave():
+	emit_signal("wave_end")
 	print("Wave ", current_wave + 1, " ended!")
 	wave_in_progress = false
-	between_waves_timer.start()
 
 func check_difficulty():
 	if (current_wave + 1) % attack_pattern_difficulties.size() == 0:
@@ -69,6 +68,3 @@ func _on_spawn_delay_timeout():
 		spawn_delay_timer.wait_time = randf_range(0, max_spawn_wait_time)
 		spawn_delay_timer.start()
 
-
-func _on_time_between_waves_timeout():
-	start_wave()

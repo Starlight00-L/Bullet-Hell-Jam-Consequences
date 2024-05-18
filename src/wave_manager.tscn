@@ -15,9 +15,4 @@ attack_pattern_difficulties = Array[Resource("res://Resources/Attack_Pattern.gd"
 [node name="Spawn_Delay" type="Timer" parent="."]
 one_shot = true
 
-[node name="Time Between Waves" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
-
 [connection signal="timeout" from="Spawn_Delay" to="." method="_on_spawn_delay_timeout"]
-[connection signal="timeout" from="Time Between Waves" to="." method="_on_time_between_waves_timeout"]

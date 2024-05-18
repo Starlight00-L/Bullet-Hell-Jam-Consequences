@@ -15,6 +15,11 @@ extends Node
 @export var attack_pattern_stats : Attack_Pattern
 @export var randomize_attack : bool = false
 
+var bullet_controller : Bullet_Manager
+
+func _ready():
+	bullet_controller = get_parent().get_parent().get_node("Bullet Manager")
+
 func _process(delta):
 	var new_rotation = rotator.rotation_degrees + rotate_speed * delta
 	rotator.rotation_degrees = fmod(new_rotation, 360)
@@ -53,6 +58,7 @@ func shoot():
 		new_bullet.rot_speed = bullet_rotation
 		new_bullet.lifetime = 10
 		get_parent().get_parent().add_child(new_bullet)
+		bullet_controller.add_bullet(new_bullet)
 	
 
 func _on_shoot_timeout():

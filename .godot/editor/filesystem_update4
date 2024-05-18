@@ -1,10 +1,12 @@
-res://src/wave_manager.tscn
-res://Scripts/Wave_Controller.gd
-res://src/enemy.tscn
 res://src/test_scene.tscn
+res://Scripts/Game Manager.gd
+res://src/wave_manager.tscn
+res://src/enemy.tscn
 res://src/temp_player.tscn
 res://src/player.tscn
 res://src/Bullet.tscn
-res://Scripts/Health Manager.gd
-res://Scripts/enemy_ai.gd
-res://Scripts/Player Attack Controller.gd
+res://Scripts/Bullet Manager.gd
+res://src/bullet_manager.tscn
+res://Scripts/Bullet.gd
+res://Scripts/Wave_Controller.gd
+res://Scripts/Enemy attack.gd
